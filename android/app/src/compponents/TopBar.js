@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
-import Icon from 'react-native-vector-icons/AntDesign';
-import { View,Text} from "react-native";
+import Icon from 'react-native-vector-icons/AntDesign'; // Assuming AntDesign is the icon set you want to use
+import { View, Text, Image } from "react-native";
+
+const search = require("../assets/image/search.png");
 
 const IconWrapper = styled(Icon)`
   font-size: ${({ w, h }) => `${w}px`};
@@ -10,10 +12,6 @@ const IconWrapper = styled(Icon)`
 
 export const Qr = () => {
   return <IconWrapper name="scan1" w={32} h={30} />;
-};
-
-export const Search = () => {
-  return <IconWrapper name="search1" w={32} h={30} />;
 };
 
 const BlueText = styled.Text`
@@ -36,9 +34,8 @@ const TopBar1 = () => {
         <BlackText>health</BlackText>
       </View>
       <View style={styles.iconContainer}>
-      <Qr /> 
-        </View>
-    
+        <Image source={search} style={{ width: 30, height: 30 }} />
+      </View>
     </View>
   );
 };
@@ -51,8 +48,9 @@ const TopBar2 = () => {
         <BlackText>health</BlackText>
       </View>
       <View style={styles.iconContainer}>
-        <Search />
-        <View style={styles.iconGap}><Qr />
+        <Image source={search} style={{ width: 30, height: 30 }} />
+        <View style={styles.iconGap}>
+          <Qr />
         </View>
       </View>
     </View>

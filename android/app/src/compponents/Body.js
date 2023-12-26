@@ -3,98 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import redheart from "../assets/image/redheart.png";
 import blackheart from "../assets/image/blackheart.png";
-
-// const GeneralGymData = [
-//     {
-//         id: '1',
-//         title: '랫풀다운',
-//     },
-//     {
-//         id: '2',
-//         title: '레그 익스텐션',
-//     },
-//     {
-//         id: '3',
-//         title: '레그 프레스',
-//     },
-//     {
-//         id: '4',
-//         title: '라잉 레그 컬',
-//     },
-//     {
-//         id: '5',
-//         title: '백 하이퍼 익스텐션',
-//     },
-//     {
-//         id: '6',
-//         title: '브이 스쿼트',
-//     },
-//     {
-//         id: '7',
-//         title: '스미스머신',
-//     },
-//     {
-//         id: '8',
-//         title: '시티드 케이블 로우',
-//     },
-//     {
-//         id: '9',
-//         title: '업디미날보드',
-//     },
-//     {
-//         id: '10',
-//         title: '인크라인프레스',
-//     },
-// ];
-
-
-
-
-
-// const MartialGymData = [
-//     {
-//         id: '1',
-//         title: '랫풀다운',
-//     },
-//     {
-//         id: '2',
-//         title: '레그 익스텐션',
-//     },
-//     {
-//         id: '3',
-//         title: '레그 프레스',
-//     },
-//     {
-//         id: '4',
-//         title: ' 시티드 레그컬',
-//     },
-//     {
-//         id: '5',
-//         title: '시티드 케이블 로우',
-//     },
-//     {
-//         id: '6',
-//         title: ' 펙 덱 리어 델트',
-//     },
-//     {
-//         id: '7',
-//         title: '펙 덱 플라이',
-//     },
-//     {
-//         id: '8',
-//         title: '하이퍼 백 익스텐션',
-//     },
-//     {
-//         id: '9'
-//         title: ' 힙 어덕션 머신',
-//     },
-//     {
-//         id: '10',
-//         title: '힙 어브덕션 머신',
-//     },
-// ];
-
-
+import x from "../assets/image/x.png";
 
 class Body extends Component {
   state = {
@@ -141,7 +50,6 @@ class Body extends Component {
       },
     ],
   };
-
   toggleLike = (id) => {
     this.setState((prevState) => ({
       GeneralGymData: prevState.GeneralGymData.map((exercise) =>
@@ -151,8 +59,31 @@ class Body extends Component {
   };
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
+       
+        <View style={styles.addButtonContainer}>
+          <TouchableOpacity
+            style={styles.addButton}
+          
+          >
+            <Text style={styles.addButtonText}>운동 추가하기</Text>
+          </TouchableOpacity>
+         
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('TimeLimitOFF');
+            }}
+            style={styles.xButton }
+          
+          >
+            <Image source={x} style={{ width: 20, height: 20 }} />
+          </TouchableOpacity>
+        </View>
+
+     
         {this.state.GeneralGymData.map((exercise) => (
           <View style={styles.GeneralGymData} key={exercise.id}>
             <View style={styles.todoText}>
@@ -173,12 +104,10 @@ class Body extends Component {
 
 const styles = StyleSheet.create({
   container: {
-
-    marginVertical: 5,
-    marginHorizontal: 20,
-    padding: 10,
+    paddingTop: 10,
+    padding: 20,
     backgroundColor: '#FFF',
-    borderRadius: 10,
+    borderRadius: 20,
   },
   GeneralGymData: {
     flexDirection: 'row',
@@ -188,15 +117,28 @@ const styles = StyleSheet.create({
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  todoCheckbox: {
-    marginRight: 5,
-  },
   todoText: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  todoDelBtn: {
-    color: '#777',
+  addButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  addButton: {
+    alignItems: 'center',
+  },
+  addButtonText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'rgba(0, 0, 0, 0.9)',
+    marginLeft: 100
+
+  },
+  xButton: {
+    marginRight: 3,
   },
 });
 

@@ -45,6 +45,7 @@ const Button2Container = styled(TouchableOpacity)`
       justify-content: center;
 
 
+
 `;
 
 const Button2Title = styled(Text)`
@@ -52,6 +53,8 @@ const Button2Title = styled(Text)`
     font-weight: bold;
     color: #FFFFFF;
     justify-content: center;
+    align-items: center;
+    
 `;
 
 export const Button2 = props => {
@@ -64,10 +67,11 @@ export const Button2 = props => {
 
 const Button3Container = styled(TouchableOpacity)`
       width: 149px;
-      height: 24px;
+      height: 30px;
       background-color: rgba(255, 169, 169, 0.28);
       border-radius: 5px;
-
+      justify-content: center;
+      align-items: center;
 
 `;
 
@@ -119,7 +123,7 @@ export const Button4 = props => {
 
 
 //타바타 TimeLimitOFF
-const Button5Container = styled(View)`
+const Button5Container = styled(TouchableOpacity)`
 width: 365px;
 
 padding-top: 10px;
@@ -157,7 +161,7 @@ padding-right: 12px;
 const Button6Title = styled(Text)`
     font-size: 20px;
     font-weight: normal;
-   color: ${({theme}) => theme.solidLine};
+    color: rgba(0, 0, 0, 0.9);
 
 `;
 
