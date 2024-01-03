@@ -59,7 +59,7 @@ const TopBar2 = () => {
 
 const styles = {
   YhealthContainer: {
-    paddingTop: 10,
+    paddingTop: 25,
     paddingRight: 20,
     paddingBottom: 6,
     paddingLeft: 30,

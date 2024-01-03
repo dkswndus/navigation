@@ -18,7 +18,7 @@ import { Button } from 'react-native';
 
 
 import { useNavigation } from '@react-navigation/native';
-import Body from '../compponents/Body';
+
 const remove = require("../assets/image/remove.png");
 
 const Container1 = styled.View`
@@ -113,10 +113,11 @@ const TimeLimitON = () => {
   const navigateToTimeLimitOFF = () => {
     navigation.navigate('TimeLimitOFF');
   };
- const navigateToBody = ()=>{
-  navigation.navigate('Body');
- };
- 
+
+  const navigateToFlatList= () => {
+    navigation.navigate('FlatList');
+  };
+
   const [stack, setStack] = useState([]);
   const [counter, setCounter] = useState(1);
   const [currentInput, setCurrentInput] = useState({
@@ -185,8 +186,8 @@ const TimeLimitON = () => {
                   <InputLabel style={{}}>횟수</InputLabel>
                   <InputLabel style={{}}>세트</InputLabel>
                   <InputLabel style={{}}>준비시간</InputLabel>
-                  <InputLabel style={{}}>운동시간</InputLabel>
-                  <InputLabel style={{}}>휴식시간</InputLabel>
+                  <InputLabel style={{}}> 운동시간</InputLabel>
+                  <InputLabel style={{}}> 휴식시간</InputLabel>
                 </InputRow>
 
                 <InputRowContainer>
@@ -212,7 +213,7 @@ const TimeLimitON = () => {
                     keyboardType="numeric"
                   />
                    <TextInput
-                    placeholder="입력"
+                    placeholder=" 입력"
                     value={currentInput.reps}
                     onChangeText={(text) => {
                       validateAndSetInput('reps', text);
@@ -284,7 +285,7 @@ const TimeLimitON = () => {
             <Button2 title="운동 시작" />
           </Container2>
 
-          <StatusBar backgroundColor={theme.background} />
+          <StatusBar barStyle="light-content" backgroundColor="black" />
         </Container1>
       </ThemeProvider>
     </ScrollView>

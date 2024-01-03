@@ -5,7 +5,12 @@ import StackNavigation from './android/app/src/navigations/Stack';
 import TimeLimitOFF from './android/app/src/tabata/TimeLimitOFF';
 import TimeLimitON from './android/app/src/tabata/TimeLimitON';
 import 'react-native-gesture-handler';
-import Body from './android/app/src/compponents/Body';
+
+import { StatusBar, TouchableOpacity, View, ScrollView, TextInput, Text, Animated, Image } from 'react-native';
+import NonstopWatchPage from './android/app/src/tabata/NonstopWatch';
+import StopWatchPage from './android/app/src/tabata/StopWatch';
+import FlatList from './android/app/src/tabata/FlatList';
+
 
 const Stack = createStackNavigator();
 
@@ -15,26 +20,12 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name="TimeLimitOFF" component={TimeLimitOFF} options={{ headerShown: false }} />
         <Stack.Screen name="TimeLimitON" component={TimeLimitON} options={{ headerShown: false }} />
-        <Stack.Screen name="Body" component={Body} options={{ headerShown: false }} />
+        <Stack.Screen name="FlatList" component={FlatList} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 
-// const App = () => {
-//   return (
-//     // <NavigationContainer>
-//     //   <StackNavigation/>
-//     // </NavigationContainer>
-//     <View>
-//       {/* <TimeLimitON/> */}
-//  <TimeLimitOFF/>
-//   {/* <StopWatchPage/> */}
-//   {/* <NonstopWatchPage/> */}
-//     </View>
-
-//     );
-// }; 
 
 export default App;

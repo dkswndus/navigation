@@ -43,7 +43,7 @@ const Button2Container = styled(TouchableOpacity)`
       border-radius: 10px;
       align-items: center;
       justify-content: center;
-
+  
 
 
 `;
@@ -122,38 +122,9 @@ export const Button4 = props => {
 
 
 
-//타바타 TimeLimitOFF
-const Button5Container = styled(TouchableOpacity)`
-width: 365px;
-
-padding-top: 10px;
-padding-right: 12px;
-
-border-top-width: 1px; 
-
-border-color: ${({ theme }) => theme.solidLine};
-
-`;
-
-const Button5Title = styled(Text)`
-    font-size: 20px;
-    font-weight: normal;
-   color: ${({theme}) => theme.solidLine};
-
-`;
-
-export const Button5 = props => {
-    return (
-        <Button5Container>
-            <Button5Title>{props.title}</Button5Title>
-        </Button5Container>
-    );
-};
-
-
 const Button6Container = styled(View)`
 width: 365px;
-padding-top: 10px;
+padding-top: 5px;
 padding-right: 12px;
 
 `;
@@ -176,6 +147,35 @@ export const Button6 = props => {
 
 
 
+const Button7Container = styled(TouchableOpacity)`
+      width: 200px;
+      height: 42px;
+      background-color: #1A6DFF;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-left: 90px;
+      margin-top:20px;
+
+
+`;
+
+const Button7Title = styled(Text)`
+    font-size: 27px;
+    font-weight: bold;
+    color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
+    
+`;
+
+export const Button7 = props => {
+    return (
+        <Button7Container>
+            <Button7Title>{props.title}</Button7Title>
+        </Button7Container>
+    );
+};
 
 
 
@@ -187,4 +187,5 @@ export const Button6 = props => {
 
 
 
-export default {Button1, Button2,Button3,Button4,Button5,Button6};
+
+export default {Button1, Button2,Button3,Button4,Button6,Button7};
