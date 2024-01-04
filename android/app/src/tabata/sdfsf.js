@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { ScrollView, StatusBar, TouchableOpacity, View, TextInput, Text } from 'react-native';
+import { StatusBar, TouchableOpacity, View, ScrollView, TextInput, Text, Animated, Image } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
+import { Swipeable, TouchableHighlight } from 'react-native-gesture-handler';
 
 import { theme } from "../compponents/theme";
 import { TopBar1 } from "../compponents/TopBar";
 import { Button2, Button6 } from "../compponents/Button";
 import { DropdownComponent2 } from '../compponents/DropDown';
-import { generalGymData } from './data';
+
+import { useNavigation } from '@react-navigation/native';
+
+const remove = require("../assets/image/remove.png");
+const more = require("../assets/image/more.png");
+
 const Container1 = styled.View`
   background-color: ${({ theme }) => theme.background};
 `;
@@ -28,31 +33,59 @@ const Container4 = styled.View`
   border-top-color: ${({ theme }) => theme.solidLine};
 `;
 
+
 const InputRowContainer = styled.View`
   flex-direction: row;
   padding-left: 14px;
-  margin-bottom: 10px;
+  marginBottom: -10px;
 `;
 
 const InputRow = styled.View`
   flex-direction: row;
   padding-left: 14px;
-  margin-bottom: 10px;
+  marginBottom: -10px;
 `;
 
 const InputLabel = styled.Text`
   font-size: 15px;
-  margin-right: 10px;
-  color: ${theme.main};
+  margin-right: 80px;
+`;
+const Button7Container = styled(TouchableOpacity)`
+  align-items: center;
+  padding-bottom: 10px;
+
+`;
+const Button5Container = styled(TouchableOpacity)`
+width: 365px;
+
+padding-top: 10px;
+padding-right: 12px;
+
+border-top-width: 1px; 
+
+border-color: ${({ theme }) => theme.solidLine};
+
 `;
 
-const InputField = styled.TextInput`
-  height: 40px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 8px;
-  flex: 1;
+const Button5Title = styled(Text)`
+    font-size: 20px;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.9);
+
 `;
+const EventSettingContainer = styled.View`
+flex-direction: row;
+align-items: center;
+
+`
+export const Button5 = props => {
+  return (
+    <Button5Container>
+      <Button5Title>{props.title}</Button5Title>
+    </Button5Container>
+  );
+};
+
 
 const TimeOffButtonContainer = styled(TouchableOpacity)`
   width: 149px;
@@ -69,25 +102,12 @@ const TimeOffButtonText = styled.Text`
   color: rgba(0, 0, 0, 0.9);
 `;
 
-const InputContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-const TimeLimitOFF = ({ route }) => {
+
+const TimeLimitOFF = () => {
   const navigation = useNavigation();
-  const selectedItems = route.params?.selectedItems || [];
-  const selectedLocation = route.params?.selectedLocation || 'general';
 
   const navigateToTimeLimitON = () => {
     navigation.navigate('TimeLimitON');
-  };
-
-  const navigateToFlatList = () => {
-    if (selectedLocation === 'general') {
-      navigation.navigate('FlatList', { generalGymData });
-    } else if (selectedLocation === 'martialArts') {
-      navigation.navigate('FlatList', { martialArtsGymData });
-    }
   };
 
   const [stack, setStack] = useState([]);
@@ -105,64 +125,77 @@ const TimeLimitOFF = ({ route }) => {
       setCurrentInput((prevInput) => ({ ...prevInput, [inputName]: 'error' }));
     }
   };
+
+
+
   const addToStack = () => {
     if (stack.length < 10) {
       const newIndex = stack.length;
       const currentCounter = counter;
-  
-   
-      const selectedExercisesComponents = selectedItems.map((exerciseId) => {
-        const numericId = parseInt(exerciseId, 10);
-  
-        return (
-          <View key={numericId} style={{ marginTop: 10 }}>
-            <InputRow>
-              <InputLabel>횟수</InputLabel>
-              <InputLabel>세트</InputLabel>
-            </InputRow>
-            <InputRowContainer>
-              <InputField
-                placeholder="입력"
-                value={currentInput.reps}
-                onChangeText={(text) => {
-                  validateAndSetInput('reps', text);
-                }}
-                keyboardType="numeric"
-              />
-              <InputField
-                placeholder="입력"
-                value={currentInput.sets}
-                onChangeText={(text) => {
-                  validateAndSetInput('sets', text);
-                }}
-                keyboardType="numeric"
-              />
-            </InputRowContainer>
-          </View>
-        );
-      });
-  
+
       setStack((prevStack) => [
         ...prevStack,
         {
-          key: newIndex,
+          key: `item-${currentCounter}`,
           component: (
-            <View key={newIndex} style={{ marginTop: 10 }}>
-              {selectedExercisesComponents}
+
+            <View>
+
+              <EventSettingContainer>
+                <Button5
+                  title={`${currentCounter}. ______종목 설정______`}
+                  color={theme.main}
+
+                />
+
+
+              </EventSettingContainer>
+
+
+
+              <InputRow>
+                <InputLabel style={{}}>횟수</InputLabel>
+                <InputLabel style={{}}> 세트</InputLabel>
+              </InputRow>
+
+              <InputRowContainer>
+                <TextInput
+                  placeholder="입력"
+                  value={currentInput.reps}
+                  onChangeText={(text) => {
+                    validateAndSetInput('reps', text);
+                    setCurrentInput((prevInput) => ({ ...prevInput, reps: text }));
+                  }}
+                  style={{ fontSize: 15, color: theme.main, marginRight: 80, marginLeft: -4 }}
+                  keyboardType="numeric"
+                />
+
+                <TextInput
+                  placeholder="입력  "
+                  value={currentInput.sets}
+                  onChangeText={(text) => {
+                    validateAndSetInput('sets', text);
+                    setCurrentInput((prevInput) => ({ ...prevInput, sets: text }));
+                  }}
+                  style={{ fontSize: 15, color: theme.main, paddingLeft: -55 }}
+                  keyboardType="numeric"
+                />
+              </InputRowContainer>
             </View>
+
           ),
         },
       ]);
+
       setCounter((prevCounter) => prevCounter + 1);
       setCurrentInput({ sets: '', reps: '' });
     }
   };
-  
- 
 
   return (
     <ScrollView>
       <ThemeProvider theme={theme}>
+
         <Container1>
           <TopBar1 />
           <Container2>
@@ -173,24 +206,23 @@ const TimeLimitOFF = ({ route }) => {
             <TimeOffButtonContainer onPress={navigateToTimeLimitON}>
               <TimeOffButtonText>Time Limit OFF</TimeOffButtonText>
             </TimeOffButtonContainer>
+            {stack.map((item) => (
+              <View key={item.key} style={{ marginTop: 10 }}>
+                {item.component}
+              </View>
+            ))}
           </Container3>
 
           <Container2>
             <Container4>
-              {stack.map((item) => (
-                <View key={item.key} style={{ marginTop: 10 }}>
-                  {item.component}
-                </View>
-              ))}
-              <TouchableOpacity onPress={navigateToFlatList}>
+              <TouchableOpacity onPress={addToStack}>
                 <Button6 title={`+ 운동 추가하기 `} />
               </TouchableOpacity>
             </Container4>
-
             <Button2 title="운동 시작" />
           </Container2>
 
-          <StatusBar backgroundColor="black" />
+          <StatusBar barStyle="light-content" backgroundColor="black" />
         </Container1>
       </ThemeProvider>
     </ScrollView>

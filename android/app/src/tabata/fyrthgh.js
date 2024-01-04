@@ -7,7 +7,7 @@ import { theme } from "../compponents/theme";
 import { TopBar1 } from "../compponents/TopBar";
 import { Button2, Button6 } from "../compponents/Button";
 import { DropdownComponent2 } from '../compponents/DropDown';
-import { generalGymData } from './data';
+
 const Container1 = styled.View`
   background-color: ${({ theme }) => theme.background};
 `;
@@ -28,22 +28,15 @@ const Container4 = styled.View`
   border-top-color: ${({ theme }) => theme.solidLine};
 `;
 
-const InputRowContainer = styled.View`
-  flex-direction: row;
-  padding-left: 14px;
-  margin-bottom: 10px;
-`;
-
 const InputRow = styled.View`
   flex-direction: row;
   padding-left: 14px;
-  margin-bottom: 10px;
+  marginBottom: -10px;
 `;
 
 const InputLabel = styled.Text`
   font-size: 15px;
-  margin-right: 10px;
-  color: ${theme.main};
+  margin-right: 80px;
 `;
 
 const InputField = styled.TextInput`
@@ -51,7 +44,6 @@ const InputField = styled.TextInput`
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 8px;
-  flex: 1;
 `;
 
 const TimeOffButtonContainer = styled(TouchableOpacity)`
@@ -73,25 +65,17 @@ const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+
 const TimeLimitOFF = ({ route }) => {
   const navigation = useNavigation();
   const selectedItems = route.params?.selectedItems || [];
-  const selectedLocation = route.params?.selectedLocation || 'general';
 
   const navigateToTimeLimitON = () => {
     navigation.navigate('TimeLimitON');
   };
-
   const navigateToFlatList = () => {
-    if (selectedLocation === 'general') {
-      navigation.navigate('FlatList', { generalGymData });
-    } else if (selectedLocation === 'martialArts') {
-      navigation.navigate('FlatList', { martialArtsGymData });
-    }
+    navigation.navigate('FlatList');
   };
-
-  const [stack, setStack] = useState([]);
-  const [counter, setCounter] = useState(1);
   const [currentInput, setCurrentInput] = useState({
     sets: '',
     reps: '',
@@ -105,60 +89,6 @@ const TimeLimitOFF = ({ route }) => {
       setCurrentInput((prevInput) => ({ ...prevInput, [inputName]: 'error' }));
     }
   };
-  const addToStack = () => {
-    if (stack.length < 10) {
-      const newIndex = stack.length;
-      const currentCounter = counter;
-  
-   
-      const selectedExercisesComponents = selectedItems.map((exerciseId) => {
-        const numericId = parseInt(exerciseId, 10);
-  
-        return (
-          <View key={numericId} style={{ marginTop: 10 }}>
-            <InputRow>
-              <InputLabel>횟수</InputLabel>
-              <InputLabel>세트</InputLabel>
-            </InputRow>
-            <InputRowContainer>
-              <InputField
-                placeholder="입력"
-                value={currentInput.reps}
-                onChangeText={(text) => {
-                  validateAndSetInput('reps', text);
-                }}
-                keyboardType="numeric"
-              />
-              <InputField
-                placeholder="입력"
-                value={currentInput.sets}
-                onChangeText={(text) => {
-                  validateAndSetInput('sets', text);
-                }}
-                keyboardType="numeric"
-              />
-            </InputRowContainer>
-          </View>
-        );
-      });
-  
-      setStack((prevStack) => [
-        ...prevStack,
-        {
-          key: newIndex,
-          component: (
-            <View key={newIndex} style={{ marginTop: 10 }}>
-              {selectedExercisesComponents}
-            </View>
-          ),
-        },
-      ]);
-      setCounter((prevCounter) => prevCounter + 1);
-      setCurrentInput({ sets: '', reps: '' });
-    }
-  };
-  
- 
 
   return (
     <ScrollView>
@@ -177,10 +107,32 @@ const TimeLimitOFF = ({ route }) => {
 
           <Container2>
             <Container4>
-              {stack.map((item) => (
-                <View key={item.key} style={{ marginTop: 10 }}>
-                  {item.component}
-                </View>
+              {selectedItems.map((exercise) => (
+                <InputContainer key={exercise.id}>
+                  <InputLabel>{exercise.title}</InputLabel>
+                  <InputRow>
+                    <InputField
+                      placeholder="횟수 입력"
+                      value={currentInput.reps}
+                      onChangeText={(text) => {
+                        validateAndSetInput('reps', text);
+                        setCurrentInput((prevInput) => ({ ...prevInput, reps: text }));
+                      }}
+                      style={{ fontSize: 15, color: theme.main, marginRight: 80, marginLeft: -4 }}
+                      keyboardType="numeric"
+                    />
+                    <InputField
+                      placeholder="세트 입력"
+                      value={currentInput.sets}
+                      onChangeText={(text) => {
+                        validateAndSetInput('sets', text);
+                        setCurrentInput((prevInput) => ({ ...prevInput, sets: text }));
+                      }}
+                      style={{ fontSize: 15, color: theme.main, paddingLeft: -55 }}
+                      keyboardType="numeric"
+                    />
+                  </InputRow>
+                </InputContainer>
               ))}
               <TouchableOpacity onPress={navigateToFlatList}>
                 <Button6 title={`+ 운동 추가하기 `} />

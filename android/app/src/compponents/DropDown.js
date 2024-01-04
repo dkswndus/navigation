@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import { useNavigation } from '@react-navigation/native';
 const data1 = [
   { label: '시설 건의사항', value: '1' },
   { label: '어플 건의사항', value: '2' },
@@ -105,16 +105,25 @@ const styles = StyleSheet.create({
 
 
 
-
 const data2 = [
   { label: '종체', value: '1' },
   { label: '무도대체육관', value: '2' },
-
 ];
 
 const DropdownComponent2 = () => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+
+  const navigation = useNavigation();
+  
+  const navigateToFlatListWithSelection = () => {
+    if (value) {
+      navigation.navigate('FlatListWithSelection', {
+        selectedValueFromDropdown: value,
+      });
+    }
+  };
+
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -130,33 +139,30 @@ const DropdownComponent2 = () => {
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-           style={[
-            styles.dropdown,
-            isFocus && { borderColor: 'rgba(255, 255, 255, 1)' },
-          ]}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-        
-
+        style={[
+          styles.dropdown,
+          isFocus && { borderColor: 'rgba(255, 255, 255, 1)' },
+        ]}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
         data={data2}
-      
         maxHeight={400}
         labelField="label"
-        valueField="value"
+        valueField="value"  // 수정된 부분
         placeholder="장소를 선택해주세요."
-
         value={value}
-  
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
           setValue(item.value);
           setIsFocus(false);
         }}
+        onItemPress={navigateToFlatListWithSelection}
       />
     </View>
   );
 };
 
 export { DropdownComponent1, DropdownComponent2 };
+
 
