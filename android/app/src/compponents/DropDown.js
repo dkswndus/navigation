@@ -114,16 +114,6 @@ const DropdownComponent2 = () => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const navigation = useNavigation();
-  
-  const navigateToFlatListWithSelection = () => {
-    if (value) {
-      navigation.navigate('FlatListWithSelection', {
-        selectedValueFromDropdown: value,
-      });
-    }
-  };
-
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -157,7 +147,7 @@ const DropdownComponent2 = () => {
           setValue(item.value);
           setIsFocus(false);
         }}
-        onItemPress={navigateToFlatListWithSelection}
+      
       />
     </View>
   );

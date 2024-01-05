@@ -55,6 +55,28 @@ export const generalGymData = [
      
       
   ];
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
   export const generalGymchestExercisesData = [
     { id: '1', title: '종체가슴' },
     { id: '2', title: '펙덱 플라이' },
@@ -296,13 +318,15 @@ export const martialArtsgymbackExercisesData = [
 
 
 
-
+//전완근
 export const forearmExercisesData = [
     { id: '1', title: '덤벨 리스트 컬' },
     { id: '2', title: '리스트 컬' },
     { id: '3', title: '리스트 롤러' },
     
   ];
+
+  //코어
   export const coreExercisesData = [
     { id: '1', title: '싯업' },
     { id: '2', title: '인클라인 트위스트 싯업' },
@@ -322,7 +346,7 @@ export const forearmExercisesData = [
    
   ];
 
-
+//유산소 
   export const cardioExercisesData = [
     { id: '1', title: '슬로우버퍼' },
     { id: '2', title: '크리스 크로스 점프' },
