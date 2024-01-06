@@ -8,6 +8,7 @@ import { TopBar1 } from "../compponents/TopBar";
 import { Button2, Button6 } from "../compponents/Button";
 import { DropdownComponent2 } from '../compponents/DropDown';
 import { generalGymData } from './data';
+
 const Container1 = styled.View`
   background-color: ${({ theme }) => theme.background};
 `;
@@ -73,21 +74,23 @@ const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+
 const TimeLimitOFF = ({ route }) => {
   const navigation = useNavigation();
   const selectedItems = route.params?.selectedItems || [];
-  const selectedLocation = route.params?.selectedLocation || 'general';
+  const currentGeneralGymData = route.params?.currentGeneralGymData || [];
 
   const navigateToTimeLimitON = () => {
     navigation.navigate('TimeLimitON');
   };
 
+  const navigateToCircularTimer =() =>{
+    navigation.navigate('CircularTimer');
+  };
+
   const navigateToFlatList = () => {
-    if (selectedLocation === 'general') {
-      navigation.navigate('FlatList', { generalGymData });
-    } else if (selectedLocation === 'martialArts') {
-      navigation.navigate('FlatList', { martialArtsGymData });
-    }
+    // Adjusted to use currentGeneralGymData instead of generalGymData
+    navigation.navigate('FlatList', { generalGymData: currentGeneralGymData });
   };
 
   const [stack, setStack] = useState([]);
@@ -105,43 +108,20 @@ const TimeLimitOFF = ({ route }) => {
       setCurrentInput((prevInput) => ({ ...prevInput, [inputName]: 'error' }));
     }
   };
+
   const addToStack = () => {
     if (stack.length < 10) {
       const newIndex = stack.length;
-      const currentCounter = counter;
-  
-   
+
       const selectedExercisesComponents = selectedItems.map((exerciseId) => {
         const numericId = parseInt(exerciseId, 10);
-  
         return (
           <View key={numericId} style={{ marginTop: 10 }}>
-            <InputRow>
-              <InputLabel>횟수</InputLabel>
-              <InputLabel>세트</InputLabel>
-            </InputRow>
-            <InputRowContainer>
-              <InputField
-                placeholder="입력"
-                value={currentInput.reps}
-                onChangeText={(text) => {
-                  validateAndSetInput('reps', text);
-                }}
-                keyboardType="numeric"
-              />
-              <InputField
-                placeholder="입력"
-                value={currentInput.sets}
-                onChangeText={(text) => {
-                  validateAndSetInput('sets', text);
-                }}
-                keyboardType="numeric"
-              />
-            </InputRowContainer>
+            <Text>{currentGeneralGymData.find((item) => item.id === numericId)?.title}</Text>
           </View>
         );
       });
-  
+
       setStack((prevStack) => [
         ...prevStack,
         {
@@ -149,6 +129,28 @@ const TimeLimitOFF = ({ route }) => {
           component: (
             <View key={newIndex} style={{ marginTop: 10 }}>
               {selectedExercisesComponents}
+              <InputRow>
+                <InputLabel>횟수</InputLabel>
+                <InputLabel>세트</InputLabel>
+              </InputRow>
+              <InputRowContainer>
+                <InputField
+                  placeholder="입력"
+                  value={currentInput.reps}
+                  onChangeText={(text) => {
+                    validateAndSetInput('reps', text);
+                  }}
+                  keyboardType="numeric"
+                />
+                <InputField
+                  placeholder="입력"
+                  value={currentInput.sets}
+                  onChangeText={(text) => {
+                    validateAndSetInput('sets', text);
+                  }}
+                  keyboardType="numeric"
+                />
+              </InputRowContainer>
             </View>
           ),
         },
@@ -157,8 +159,6 @@ const TimeLimitOFF = ({ route }) => {
       setCurrentInput({ sets: '', reps: '' });
     }
   };
-  
- 
 
   return (
     <ScrollView>
@@ -183,11 +183,13 @@ const TimeLimitOFF = ({ route }) => {
                 </View>
               ))}
               <TouchableOpacity onPress={navigateToFlatList}>
-                <Button6 title={`+ 운동 추가하기 `} />
+                <Button6 title={`+ 운동 추가하기 `} onPress={addToStack} />
               </TouchableOpacity>
             </Container4>
-
-            <Button2 title="운동 시작" />
+              <TouchableOpacity  onPress={navigateToCircularTimer}>
+              <Button2 title="운동 시작" />
+              </TouchableOpacity>
+     
           </Container2>
 
           <StatusBar backgroundColor="black" />

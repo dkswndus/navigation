@@ -42,7 +42,7 @@ const FlatListWithSelection = () => {
   };
 
   const navigateToTimeLimitOFF = () => {
-    navigation.navigate('TimeLimitOFF', { selectedItems });
+    navigation.navigate('TimeLimitOFF', { selectedItems, currentGeneralGymData });
   };
 
   return (
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'rgba(252, 253, 255, 0.49)',
     borderRadius: 30,
+  
   },
   scrollView: {
     flexDirection: 'column',
@@ -153,10 +154,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
+
   },
   todoText: {
     flexDirection: 'row',
     alignItems: 'center',
+
   },
   addButtonContainer: {
     flexDirection: 'row',
@@ -174,9 +177,9 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   horizontaaScrollView: {
-    overflow: 'hidden',
+
     flexDirection: 'row',
-    marginBottom: 10,
+   
   },
   exerciseContainer: {
     flexDirection: 'row',

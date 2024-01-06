@@ -36,7 +36,7 @@ export const Button1 = props => {
 
 
 
-const Button2Container = styled(TouchableOpacity)`
+const Button2Container = styled(View)`
       width: 368px;
       height: 42px;
       background-color: #1A6DFF;

@@ -2,7 +2,6 @@
 //종체
 export const generalGymData = [
         { id: '1', title: '랫풀다운' },
-        { id: '2', title: '랫 풀다운 머신' },
         { id: '3', title: '패러럴 그립 랫 풀 다운' },
         { id: '4', title: '언더핸드 케이블 랫 풀 다운' },
         { id: '5', title: '백 랫 풀 다운' },
@@ -18,7 +17,7 @@ export const generalGymData = [
         { id: '15', title: '와이드 그립 시티드 케이블 로우' },
         { id: '16', title: '싯업' },
         { id: '17', title: '인클라인 트위스트 싯업' },
-        { id: '18', title: '인클라인 밴치 프레스 머신' },
+        { id: '18', title: '인클라인 밴치 프레스' },
         { id: '19', title: '팩덱 리어 델트' },
         { id: '20', title: '팩덱 플라이' },
         { id: '21', title: '스미스머신 벤치 프레스' },
@@ -78,7 +77,7 @@ export const generalGymData = [
 
 
   export const generalGymchestExercisesData = [
-    { id: '1', title: '종체가슴' },
+
     { id: '2', title: '펙덱 플라이' },
     { id: '3', title: '스미스 머신 벤치 프레스' },
     { id: '4', title: '인클라인 스미스 머신 벤치 프레스' },
@@ -92,7 +91,7 @@ export const generalGymData = [
    
   ];
   export const generalGymchestbackExercisesData = [
-    { id: '1', title: '랫 풀 다운' },
+    { id: '1', title: '랫풀다운' },
     { id: '2', title: '펙덱 플라이' },
     { id: '3', title: '레그 익스텐션' },
     { id: '4', title: '시티드 케이블 로우' },
@@ -105,7 +104,7 @@ export const generalGymData = [
     { id: '11', title: '스미스 머신 벤치 프레스' },
     { id: '12', title: '시티드 레그 프레스' },
     { id: '13', title: '스미스 머신 스쿼트' },
-    { id: '14', title: '인클라인 벤치 프레스 머신' },
+    { id: '14', title: '인클라인 벤치 프레스 ' },
     { id: '15', title: '스미스 머신 바벨 로우' },
     { id: '16', title: '케이블 크로스오버' },
     { id: '17', title: '페이스 풀' },
@@ -213,6 +212,56 @@ export const generalGymData = [
   ];
   
 
+//전완근
+export const forearmExercisesData = [
+  { id: '1', title: '덤벨 리스트 컬' },
+  { id: '2', title: '리스트 컬' },
+  { id: '3', title: '리스트 롤러' },
+  
+];
+
+//코어
+export const coreExercisesData = [
+  { id: '1', title: '싯업' },
+  { id: '2', title: '인클라인 트위스트 싯업' },
+  { id: '3', title: '크런치' },
+  { id: '4', title: '레그레이즈' },
+  { id: '5', title: '플랭크' },
+  { id: '6', title: '힐 터치 크런치' },
+  { id: '7', title: '사이드 니업' },
+  { id: '8', title: '플러터 킥' },
+  { id: '9', title: '어블리크 크런치' },
+  { id: '10', title: '덤벨 사이드 밴드' },
+  { id: '11', title: '사이드 레그 레이즈' },
+  { id: '12', title: '버드 독' },
+  { id: '13', title: '스타피쉬 크런치' },
+  { id: '14', title: '레인보우 플랭크' },
+  { id: '15', title: '브이 업' },
+ 
+];
+
+//유산소 
+export const cardioExercisesData = [
+  { id: '1', title: '슬로우버퍼' },
+  { id: '2', title: '크리스 크로스 점프' },
+  { id: '3', title: '크리스 크로스 잭' },
+  { id: '4', title: '터치다운' },
+  { id: '5', title: '잭스텝' },
+  { id: '6', title: '하이 니 스킵스' },
+  { id: '7', title: '암워킹 마운틴 클라이머' },
+  { id: '8', title: '스쿼트 버피' },
+  { id: '9', title: '스텝업 스텝 박스' },
+  { id: '10', title: '사이드 마운틴 클라이머' },
+  { id: '11', title: '스텝퍼' },
+  { id: '12', title: '스쿼트 오버헤드 프레스' },
+  { id: '13', title: '니 쓰러스트' },
+  { id: '14', title: '스케이터 홉 탭' },
+  { id: '15', title: '훌라후프' },
+  { id: '16', title: '트위스트 니 쓰러스트' },
+  { id: '17', title: '크리스 크로스 엘보우 투 니' },
+  { id: '18', title: '로우 런지 트위스트' },
+
+];
 
 
 
@@ -220,7 +269,7 @@ export const generalGymData = [
 //무도대
 export const martialArtsgymData =[
     { id: '1', title: '랫풀다운' },
-    { id: '2', title: '랫 풀다운 머신' },
+
     { id: '3', title: '패러럴 그립 랫 풀 다운' },
     { id: '4', title: '언더핸드 케이블 랫 풀 다운' },
     { id: '5', title: '백 랫 풀 다운' },
@@ -318,53 +367,3 @@ export const martialArtsgymbackExercisesData = [
 
 
 
-//전완근
-export const forearmExercisesData = [
-    { id: '1', title: '덤벨 리스트 컬' },
-    { id: '2', title: '리스트 컬' },
-    { id: '3', title: '리스트 롤러' },
-    
-  ];
-
-  //코어
-  export const coreExercisesData = [
-    { id: '1', title: '싯업' },
-    { id: '2', title: '인클라인 트위스트 싯업' },
-    { id: '3', title: '크런치' },
-    { id: '4', title: '레그레이즈' },
-    { id: '5', title: '플랭크' },
-    { id: '6', title: '힐 터치 크런치' },
-    { id: '7', title: '사이드 니업' },
-    { id: '8', title: '플러터 킥' },
-    { id: '9', title: '어블리크 크런치' },
-    { id: '10', title: '덤벨 사이드 밴드' },
-    { id: '11', title: '사이드 레그 레이즈' },
-    { id: '12', title: '버드 독' },
-    { id: '13', title: '스타피쉬 크런치' },
-    { id: '14', title: '레인보우 플랭크' },
-    { id: '15', title: '브이 업' },
-   
-  ];
-
-//유산소 
-  export const cardioExercisesData = [
-    { id: '1', title: '슬로우버퍼' },
-    { id: '2', title: '크리스 크로스 점프' },
-    { id: '3', title: '크리스 크로스 잭' },
-    { id: '4', title: '터치다운' },
-    { id: '5', title: '잭스텝' },
-    { id: '6', title: '하이 니 스킵스' },
-    { id: '7', title: '암워킹 마운틴 클라이머' },
-    { id: '8', title: '스쿼트 버피' },
-    { id: '9', title: '스텝업 스텝 박스' },
-    { id: '10', title: '사이드 마운틴 클라이머' },
-    { id: '11', title: '스텝퍼' },
-    { id: '12', title: '스쿼트 오버헤드 프레스' },
-    { id: '13', title: '니 쓰러스트' },
-    { id: '14', title: '스케이터 홉 탭' },
-    { id: '15', title: '훌라후프' },
-    { id: '16', title: '트위스트 니 쓰러스트' },
-    { id: '17', title: '크리스 크로스 엘보우 투 니' },
-    { id: '18', title: '로우 런지 트위스트' },
-  
-  ];
