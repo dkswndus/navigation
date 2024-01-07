@@ -43,6 +43,7 @@ const Button2Container = styled(View)`
       border-radius: 10px;
       align-items: center;
       justify-content: center;
+     
   
 
 
@@ -127,12 +128,15 @@ width: 365px;
 padding-top: 5px;
 padding-right: 12px;
 
+
 `;
 
 const Button6Title = styled(Text)`
     font-size: 20px;
     font-weight: normal;
     color: rgba(0, 0, 0, 0.9);
+    padding-top: 5px;
+padding-right: 12px;
 
 `;
 

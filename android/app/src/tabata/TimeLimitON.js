@@ -224,7 +224,7 @@ const TimeLimitON = () => {
                     keyboardType="numeric"
                   />
                    <TextInput
-                    placeholder="입력"
+                    placeholder="입----력"
                     value={currentInput.reps}
                     onChangeText={(text) => {
                       validateAndSetInput('reps', text);
