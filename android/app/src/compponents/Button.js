@@ -43,7 +43,9 @@ const Button2Container = styled(View)`
       border-radius: 10px;
       align-items: center;
       justify-content: center;
-     
+      margin-top: -30px; 
+      
+   
   
 
 
@@ -95,6 +97,7 @@ const Button4Container = styled(TouchableOpacity)`
       height: 24px;
       background-color: rgba(171, 255, 195, 0.28);
       border-radius: 5px;
+ 
 
 
 `;
@@ -124,9 +127,10 @@ export const Button4 = props => {
 
 
 const Button6Container = styled(View)`
-width: 365px;
+
 padding-top: 5px;
 padding-right: 12px;
+
 
 
 `;
@@ -142,9 +146,9 @@ padding-right: 12px;
 
 export const Button6 = props => {
     return (
-        <Button6Container>
+      
             <Button6Title>{props.title}</Button6Title>
-        </Button6Container>
+  
     );
 };
 

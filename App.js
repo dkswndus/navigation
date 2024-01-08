@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Image,Text } from 'react-native';
+import { Image, Text } from 'react-native';
 import exercise from './android/app/src/assets/image/exercise.png';
 import home from './android/app/src/assets/image/home.png';
 import calendar from './android/app/src/assets/image/calendar.png';
@@ -18,8 +18,6 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const ExerciseScreen = ({ route }) => {
-  
-
   return <TimeLimitOFF route={route} />;
 };
 
@@ -41,7 +39,6 @@ const TabNavigation = () => {
       tabBarOptions={{
         style: { height: 70 },
         labelStyle: { fontSize: 14 },
-
       }}
     >
       <Tab.Screen
@@ -80,6 +77,7 @@ const TabNavigation = () => {
           ),
         }}
       />
+      
       <Tab.Screen
         name="Writing"
         component={WritingScreen}

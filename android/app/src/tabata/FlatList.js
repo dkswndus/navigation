@@ -1,20 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import redheart from "../assets/image/redheart.png";
 import emptyheart from "../assets/image/emptyheart.png";
 import x from "../assets/image/x.png";
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
-import { generalGymData, martialArtsGymData, generalGymchestExercisesData,generalGymchestbackExercisesData,
-generalGymchestlowerBodyExercisesData, generalGymchestshoulderExercisesData, 
-generalGymchesttricepsExercisesData,generalGymchestbicepsExercisesData,
-forearmExercisesData,coreExercisesData,cardioExercisesData   } from './data';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { cardioExercisesData, coreExercisesData, 
+  forearmExercisesData, generalGymbackExercisesData, 
+  generalGymbicepsExercisesData, generalGymchestExercisesData, 
+  generalGymlowerBodyExercisesData, generalGymshoulderExercisesData, 
+  generalGymtricepsExercisesData, martialArtsgymbackExercisesData, 
+  martialArtsgymbicepsExercisesData, martialArtsgymchestExercisesData, 
+  martialArtsgymlowerBodyExercisesData, martialArtsgymshoulderExercisesData, 
+  martialArtsgymtricepsExercisesData,generalGymData,martialArtsGymData } from './data';
+
 
 
 const FlatListWithSelection = () => {
   const [selectedItems, setSelectedItems] = useState([]);
-  const [currentGeneralGymData, setGeneralGymData] = useState(generalGymData);
+  const [exerciseLikes, setExerciseLikes] = useState({});
+  const [currentData, setCurrentData] = useState([]);
   const navigation = useNavigation();
+  const route = useRoute();
+  const { dropdownValue } = route.params || {};
+
+  useEffect(() => {
+    // 드롭다운 값에 따라 현재 데이터 설정
+    switch (dropdownValue) {
+      case '1':
+        setCurrentData(generalGymData);
+        break;
+      case '2':
+        setCurrentData(martialArtsGymData);
+        break;
+    }
+  }, [dropdownValue]);
+  
+  const showSelectedExercise = (category) => {
+    switch (dropdownValue)
+     {
+      case '1':
+        switch (category) {
+          case '가슴':
+            setCurrentData(generalGymchestExercisesData);
+            break;
+          case '등':
+            setCurrentData(generalGymbackExercisesData);
+            break;
+          case '하체':
+            setCurrentData(generalGymlowerBodyExercisesData);
+            break;
+          case '어께':
+            setCurrentData(generalGymshoulderExercisesData);
+            break;
+          case '삼두':
+            setCurrentData(generalGymtricepsExercisesData);
+            break;
+          case '이두':
+            setCurrentData(generalGymbicepsExercisesData);
+            break;
+            case '코어':
+              setCurrentData(coreExercisesData);
+              break;
+            case '전완근':
+              setCurrentData(forearmExercisesData);
+              break;
+            case '유산소':
+              setCurrentData(cardioExercisesData);
+              break;
+
+
+
+
+        }
+        break;
+
+      case '2':
+        switch (category) {
+          case '가슴':
+            setCurrentData(martialArtsgymchestExercisesData);
+            break;
+          case '등':
+            setCurrentData(martialArtsgymbackExercisesData);
+            break;
+          case '하체':
+            setCurrentData(martialArtsgymlowerBodyExercisesData);
+            break;
+          case '어께':
+            setCurrentData(martialArtsgymshoulderExercisesData);
+            break;
+          case '삼두':
+            setCurrentData( martialArtsgymtricepsExercisesData);
+            break;
+          case '이두':
+            setCurrentData( martialArtsgymbicepsExercisesData);
+            break;
+            case '코어':
+              setCurrentData(coreExercisesData);
+              break;
+            case '전완근':
+              setCurrentData(forearmExercisesData);
+              break;
+            case '유산소':
+              setCurrentData(cardioExercisesData);
+              break;
+
+        }
+        break;
+  
+    }
+  };
+  
 
   const toggleSelection = (id) => {
     setSelectedItems((prevSelectedItems) => {
@@ -26,24 +122,22 @@ const FlatListWithSelection = () => {
     });
   };
   const showLikedExercises = () => {
-    const likedExercises = currentGeneralGymData.filter((exercise) => exercise.isLiked);
-    setGeneralGymData(likedExercises);
+    const likedExercises = currentData.filter((exercise) => exerciseLikes[exercise.title]);
+    setCurrentData(likedExercises);
   };
-  const toggleLike = (id) => {
-    setGeneralGymData((prevData) =>
-      prevData.map((exercise) =>
-        exercise.id === id ? { ...exercise, isLiked: !exercise.isLiked } : exercise
-      )
-    );
+
+  const toggleLike = (id, title) => {
+    setExerciseLikes((prevLikes) => ({
+      ...prevLikes,
+      [title]: !prevLikes[title],
+    }));
   };
 
   const navigateBackToTimeLimitOFF = () => {
     navigation.goBack();
   };
 
-  const navigateToTimeLimitOFF = () => {
-    navigation.navigate('TimeLimitOFF', { selectedItems, currentGeneralGymData });
-  };
+ 
 
   return (
     <View style={styles.container}>
@@ -58,45 +152,45 @@ const FlatListWithSelection = () => {
         <View style={styles.exerciseContainer}>
 
         <TouchableOpacity onPress={showLikedExercises}>
-          <Exercise title={"안주연"} />
+          <Exercise title={"즐겨찾기"} />
           </TouchableOpacity>
          
-          <TouchableOpacity onPress={() => setGeneralGymData(generalGymchestExercisesData)}>
-            <Exercise title={"가슴"} />
-          </TouchableOpacity>
+          <TouchableOpacity onPress={() => showSelectedExercise("가슴")}>
+  <Exercise title={"가슴"} />
+</TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setGeneralGymData(generalGymchestbackExercisesData)}>
-          <Exercise title={"등"} />
-          </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("등")}>
+  <Exercise title={"등"} />
+</TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setGeneralGymData(generalGymchestlowerBodyExercisesData)}>
-          <Exercise title={"하체"} />
-            </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("하체")}>
+  <Exercise title={"하체"} />
+</TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setGeneralGymData( generalGymchestshoulderExercisesData)}>
-            <Exercise title={"어께"} />
-            </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("어께")}>
+  <Exercise title={"어께"} />
+</TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setGeneralGymData(generalGymchesttricepsExercisesData)}>
-            <Exercise title={"삼두"} />
-            </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("삼두")}>
+  <Exercise title={"삼두"} />
+</TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setGeneralGymData(generalGymchestbicepsExercisesData)}>
-            <Exercise title={"이두"} />
-            </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("이두")}>
+  <Exercise title={"이두"} />
+</TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setGeneralGymData(coreExercisesData)}>
-            <Exercise title={"코어"} />
-            </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("코어")}>
+  <Exercise title={"코어"} />
+</TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setGeneralGymData(forearmExercisesData)}>
-            <Exercise title={"전완근"} />
-            </TouchableOpacity>
+<TouchableOpacity onPress={() => showSelectedExercise("전완근")}>
+  <Exercise title={"전완근"} />
+</TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setGeneralGymData(cardioExercisesData )}>
-            <Exercise title={"유산소"} />
-            </TouchableOpacity>
-      
+<TouchableOpacity onPress={() => showSelectedExercise("유산소")}>
+  <Exercise title={"유산소"} />
+</TouchableOpacity>
+
         
     
       
@@ -104,22 +198,22 @@ const FlatListWithSelection = () => {
       </ScrollView>
 
       <ScrollView style={styles.scrollView}>
-        {currentGeneralGymData.map((exercise) => (
+        {currentData.map((exercise) => (
           <TouchableOpacity
             key={exercise.id}
             onPress={() => toggleSelection(exercise.id)}
             style={{
               backgroundColor: selectedItems.includes(exercise.id) ? 'rgba(217, 217, 217, 0.08)' : 'rgba(252, 253, 255, 0.49)',
-              paddingHorizontal: 10,
+              paddingHorizontal: 20,
             }}>
             <View style={styles.GeneralGymData}>
               <View style={styles.todoText}>
                 <Text>{exercise.title}</Text>
               </View>
 
-              <TouchableOpacity onPress={() => toggleLike(exercise.id)}>
+              <TouchableOpacity onPress={() => toggleLike(exercise.id, exercise.title)}>
                 <Image
-                  source={exercise.isLiked ? redheart : emptyheart}
+                  source={exerciseLikes[exercise.title] ? redheart : emptyheart}
                   style={{ width: 25, height: 25 }}
                 />
               </TouchableOpacity>
@@ -127,8 +221,7 @@ const FlatListWithSelection = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-
-      <Button7 title={"추가 완료"} onPress={navigateToTimeLimitOFF} />
+      <Button7 title={"추가 완료"} onPress={navigateBackToTimeLimitOFF} />
     </View>
   );
 };
@@ -145,7 +238,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexDirection: 'column',
-    marginTop: 25,
+    marginTop: 35,
   },
   GeneralGymData: {
     flexDirection: 'row',
@@ -205,8 +298,8 @@ const Button7Title = styled(Text)`
 `;
 
 const ExerciseContainer = styled(View)`
-  width: 110px;
-  height: 40px;
+  width: 100px;
+  height: 35px;
   border-radius: 10px;
   align-items: center;
   justify-content: center;

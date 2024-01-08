@@ -7,7 +7,7 @@ import { theme } from "../compponents/theme";
 import { TopBar1 } from "../compponents/TopBar";
 import { Button2, Button6 } from "../compponents/Button";
 import { DropdownComponent2 } from '../compponents/DropDown';
-import { generalGymData } from './data';
+import { generalGymData,martialArtsGymData } from './data';
 
 const Container1 = styled.View`
   background-color: ${({ theme }) => theme.background};
@@ -15,18 +15,21 @@ const Container1 = styled.View`
 
 const Container2 = styled.View`
   align-items: center;
+  padding-bottom:10px;
 `;
 
 const Container3 = styled.View`
   padding-right: 22px;
   align-items: flex-end;
-  padding-bottom: 300px;
+  padding-bottom: 240px;
 `;
 
 const Container4 = styled.View`
-  padding-bottom: 80px;
+width: 365px;
+  padding-bottom: 110px;
   border-top-width: 1px;
   border-top-color: ${({ theme }) => theme.solidLine};
+ 
 `;
 
 const InputRowContainer = styled.View`
@@ -75,90 +78,32 @@ const InputContainer = styled.View`
   align-items: center;
 `;
 
+
 const TimeLimitOFF = ({ route }) => {
   const navigation = useNavigation();
-  const selectedItems = route.params?.selectedItems || [];
-  const currentGeneralGymData = route.params?.currentGeneralGymData || [];
+  const [valueDropdown2, setValueDropdown2] = useState(null);
 
   const navigateToTimeLimitON = () => {
     navigation.navigate('TimeLimitON');
   };
 
-  const navigateToCircularTimer =() =>{
-    navigation.navigate('CircularTimer');
+  const navigateToCircularTimer = () => {
+    if (valueDropdown2 === '1' || valueDropdown2 === '2') {
+      navigation.navigate('CircularTimer');
+    } else {
+      console.warn('DropdownComponent2에서 올바른 값이 선택되지 않았습니다.');
+    }
   };
 
   const navigateToFlatList = () => {
-    // Adjusted to use currentGeneralGymData instead of generalGymData
-    navigation.navigate('FlatList', { generalGymData: currentGeneralGymData });
-  };
+    if (valueDropdown2 === '1' || valueDropdown2 === '2') {
+      navigation.navigate('FlatList', { dropdownValue: valueDropdown2 });
 
-  const [stack, setStack] = useState([]);
-  const [counter, setCounter] = useState(1);
-  const [currentInput, setCurrentInput] = useState({
-    sets: '',
-    reps: '',
-  });
-
-  const validateAndSetInput = (inputName, text) => {
-    const numericValue = parseInt(text, 10);
-    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 10) {
-      setCurrentInput((prevInput) => ({ ...prevInput, [inputName]: text }));
     } else {
-      setCurrentInput((prevInput) => ({ ...prevInput, [inputName]: 'error' }));
+      console.warn('DropdownComponent2에서 올바른 값이 선택되지 않았습니다.');
     }
   };
 
-  const addToStack = () => {
-    if (stack.length < 10) {
-      const newIndex = stack.length;
-
-      const selectedExercisesComponents = selectedItems.map((exerciseId) => {
-        const numericId = parseInt(exerciseId, 10);
-        return (
-          <View key={numericId} style={{ marginTop: 10 }}>
-            <Text>{currentGeneralGymData.find((item) => item.id === numericId)?.title}</Text>
-          </View>
-        );
-      });
-
-      setStack((prevStack) => [
-        ...prevStack,
-        {
-          key: newIndex,
-          component: (
-            <View key={newIndex} style={{ marginTop: 10 }}>
-              {selectedExercisesComponents}
-              <InputRow>
-                <InputLabel>횟수</InputLabel>
-                <InputLabel>세트</InputLabel>
-              </InputRow>
-              <InputRowContainer>
-                <InputField
-                  placeholder="입력"
-                  value={currentInput.reps}
-                  onChangeText={(text) => {
-                    validateAndSetInput('reps', text);
-                  }}
-                  keyboardType="numeric"
-                />
-                <InputField
-                  placeholder="입력"
-                  value={currentInput.sets}
-                  onChangeText={(text) => {
-                    validateAndSetInput('sets', text);
-                  }}
-                  keyboardType="numeric"
-                />
-              </InputRowContainer>
-            </View>
-          ),
-        },
-      ]);
-      setCounter((prevCounter) => prevCounter + 1);
-      setCurrentInput({ sets: '', reps: '' });
-    }
-  };
 
   return (
     <ScrollView>
@@ -166,7 +111,7 @@ const TimeLimitOFF = ({ route }) => {
         <Container1>
           <TopBar1 />
           <Container2>
-            <DropdownComponent2 />
+          <DropdownComponent2 value={valueDropdown2} setValue={setValueDropdown2} />
           </Container2>
 
           <Container3>
@@ -177,13 +122,11 @@ const TimeLimitOFF = ({ route }) => {
 
           <Container2>
             <Container4>
-              {stack.map((item) => (
-                <View key={item.key} style={{ marginTop: 10 }}>
-                  {item.component}
-                </View>
-              ))}
+             
+
+
               <TouchableOpacity onPress={navigateToFlatList}>
-                <Button6 title={`+ 운동 추가하기 `} onPress={addToStack} />
+                <Button6 title={`+ 운동 추가하기 `}/>
               </TouchableOpacity>
             </Container4>
               <TouchableOpacity  onPress={navigateToCircularTimer}>

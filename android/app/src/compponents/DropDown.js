@@ -105,15 +105,10 @@ const styles = StyleSheet.create({
 
 
 
-const data2 = [
-  { label: '종체', value: '1' },
-  { label: '무도대체육관', value: '2' },
-];
 
-const DropdownComponent2 = () => {
-  const [value, setValue] = useState(null);
+const DropdownComponent2 = ({ value, setValue }) => {
+  const navigation = useNavigation();
   const [isFocus, setIsFocus] = useState(false);
-
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -135,10 +130,13 @@ const DropdownComponent2 = () => {
         ]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
-        data={data2}
+        data={[
+          { label: '종체', value: '1' },
+          { label: '무도대체육관', value: '2' },
+        ]}
         maxHeight={400}
         labelField="label"
-        valueField="value"  // 수정된 부분
+        valueField="value"
         placeholder="장소를 선택해주세요."
         value={value}
         onFocus={() => setIsFocus(true)}
@@ -147,7 +145,6 @@ const DropdownComponent2 = () => {
           setValue(item.value);
           setIsFocus(false);
         }}
-      
       />
     </View>
   );
