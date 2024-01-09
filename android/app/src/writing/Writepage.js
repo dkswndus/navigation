@@ -4,7 +4,7 @@ import { DropdownComponent1 } from '../compponents/DropDown';
 import { useState } from 'react';
 import { TopBar1 } from '../compponents/TopBar';
 import { useNavigation } from '@react-navigation/native';
-const WritePage = ({ route }) => {  
+const Writepage = ({ route }) => {  
     const navigation = useNavigation();
   
   const [title, setTitle] = useState('');
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default WritePage;
+export default Writepage;

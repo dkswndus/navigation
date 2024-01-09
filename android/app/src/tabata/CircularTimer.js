@@ -13,14 +13,15 @@ const formatTime = (time) => {
 const CircularTimer = () => {
   const navigation = useNavigation();
 
-  const [timerValue, setTimerValue] = useState(300); 
+  const [timerValue, setTimerValue] = useState(300);
   const [inputTime, setInputTime] = useState('');
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   const startTimer = () => {
+    const remainingTimePercentage = timerValue / 300; // Adjust 300 to the initial time
     Animated.timing(animatedValue, {
       toValue: 1,
-      duration: timerValue * 1000,
+      duration: timerValue * remainingTimePercentage * 1000, // Adjust duration calculation
       easing: Easing.linear,
       useNativeDriver: false,
     }).start(() => {
@@ -36,7 +37,7 @@ const CircularTimer = () => {
     const newTime = parseInt(inputTime, 10);
     if (!isNaN(newTime) && newTime > 0) {
       setTimerValue(newTime);
-      startTimer(); 
+      startTimer();
     }
   };
 
@@ -51,18 +52,9 @@ const CircularTimer = () => {
     };
   }, [animatedValue, timerValue]);
 
-  const interpolatedRotateAnimation = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
-
-  const rotateStyle = {
-    transform: [{ rotate: interpolatedRotateAnimation }],
-  };
-
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.circle, rotateStyle]}>
+      <Animated.View style={styles.circle}>
         <Text style={styles.timerText}>{formatTime(timerValue)}</Text>
       </Animated.View>
 

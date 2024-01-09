@@ -9,24 +9,21 @@ import { Button2, Button6 } from "../compponents/Button";
 import { DropdownComponent2 } from '../compponents/DropDown';
 import FlatList from './FlatList';
 
-const Container1 = styled.View`
-  background-color: 'rgba(255, 255, 255, 1)';
-`;
 
+//드롭다운 
 const Container2 = styled.View`
 padding-left: 20px;
 padding-right: 20px;
-
-
 `;
 
+//TimeLimitOFF 
 const Container3 = styled.View`
 align-items: flex-end;
 padding-right: 22px;
-
-
 `;
 
+
+// 세트, 횟수, 준비시간
 const Container4 = styled.View`
 padding-left: 20px;
 padding-right: 20px;  
@@ -34,25 +31,26 @@ padding-top:20px;
 `;
 
 
+
+//운동추가하기 
 const LineContainer = styled.View`
 padding-left: 20px;
 padding-right: 20px;  
 margin-bottom: 80px;
-
 `;
 
+//운동추가하기 선 
 const Container5 = styled.View`
-
-
 border-top-width: 1px;
 border-top-color:' rgba(0,0,0,0.2)';
-
 `;
-const Container6 = styled.View`
+
+
+
+//운동시작 버튼 
+const Container6 = styled.View`       
 align-items: center;
 margin-bottom: 30px;
-
-
 `;
 
 const TimeOffButtonContainer = styled(TouchableOpacity)`
@@ -72,7 +70,6 @@ const TimeOffButtonText = styled.Text`
 
 const InputContainer = styled.View`
   flex-direction: row;
- 
   padding-left: 20px;
   padding-right: 20px;
   margin-top: -10px;
@@ -80,13 +77,11 @@ const InputContainer = styled.View`
 `;
 
 const TextInputStyled = styled.TextInput`
- 
   margin-right: 10px;
   text-align: left; 
 `;
 
 const ExerciseText = styled.Text`
-
 padding-left: 20px;
 padding-right: 20px;
 margin-bottom: 5px;
@@ -190,21 +185,12 @@ const TimeLimitOFF = ({ route }) => {
           </TouchableOpacity>
 
         </Container5>
-
-     
       </LineContainer>
       <Container6>
         <TouchableOpacity onPress={navigateToCircularTimer}>
             <Button2 title="운동 시작" />
           </TouchableOpacity>
-
         </Container6>
-     
-
-
-
-
-
       <StatusBar backgroundColor="black" />
     </View>
 
