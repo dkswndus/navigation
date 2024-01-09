@@ -12,11 +12,12 @@ import { cardioExercisesData, coreExercisesData,
   generalGymtricepsExercisesData, martialArtsgymbackExercisesData, 
   martialArtsgymbicepsExercisesData, martialArtsgymchestExercisesData, 
   martialArtsgymlowerBodyExercisesData, martialArtsgymshoulderExercisesData, 
-  martialArtsgymtricepsExercisesData,generalGymData,martialArtsGymData } from './data';
+  martialArtsgymtricepsExercisesData,generalGymData,martialArtsGymData } from '../compponents/data';
 
 
 
-const FlatListWithSelection = () => {
+const FlatList = () => {
+  
   const [selectedItems, setSelectedItems] = useState([]);
   const [exerciseLikes, setExerciseLikes] = useState({});
   const [currentData, setCurrentData] = useState([]);
@@ -114,10 +115,15 @@ const FlatListWithSelection = () => {
 
   const toggleSelection = (id) => {
     setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(id)) {
-        return prevSelectedItems.filter((item) => item !== id);
+      const selectedExercise = currentData.find((exercise) => exercise.id === id);
+      const exerciseName = selectedExercise ? selectedExercise.title : ''; 
+  
+      console.log("Selected Exercise:", exerciseName);
+  
+      if (prevSelectedItems.includes(exerciseName)) {
+        return prevSelectedItems.filter((item) => item !== exerciseName);
       } else {
-        return [...prevSelectedItems, id];
+        return [...prevSelectedItems, exerciseName];
       }
     });
   };
@@ -133,9 +139,14 @@ const FlatListWithSelection = () => {
     }));
   };
 
-  const navigateBackToTimeLimitOFF = () => {
-    navigation.goBack();
+  const navigateTimeLimitOFF = () => {
+    navigation.navigate('TimeLimitOFF', { selectedItems });
   };
+
+  const navigateTimeLimitON = () => {
+    navigation.navigate('TimeLimitON', { selectedItems });
+  };
+
 
  
 
@@ -143,7 +154,7 @@ const FlatListWithSelection = () => {
     <View style={styles.container}>
       <View style={styles.addButtonContainer}>
         <Text style={styles.addButtonText}>운동 추가하기</Text>
-        <TouchableOpacity onPress={navigateBackToTimeLimitOFF} style={styles.xButton}>
+        <TouchableOpacity onPress={navigateTimeLimitOFF} style={styles.xButton}>
           <Image source={x} style={{ width: 20, height: 20, marginRight: 10 }} />
         </TouchableOpacity>
       </View>
@@ -203,7 +214,8 @@ const FlatListWithSelection = () => {
             key={exercise.id}
             onPress={() => toggleSelection(exercise.id)}
             style={{
-              backgroundColor: selectedItems.includes(exercise.id) ? 'rgba(217, 217, 217, 0.08)' : 'rgba(252, 253, 255, 0.49)',
+              backgroundColor: selectedItems.includes(exercise.title) ? 'rgba(230, 230, 230, 0.5)' : 'rgba(252, 253, 255, 0.49)',
+        
               paddingHorizontal: 20,
             }}>
             <View style={styles.GeneralGymData}>
@@ -221,7 +233,7 @@ const FlatListWithSelection = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <Button7 title={"추가 완료"} onPress={navigateBackToTimeLimitOFF} />
+      <Button7 title={"추가 완료"} onPress={navigateTimeLimitOFF} />
     </View>
   );
 };
@@ -329,4 +341,4 @@ export const Button7 = (props) => {
   );
 };
 
-export default FlatListWithSelection;
+export default FlatList;

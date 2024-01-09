@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
  
   dropdown: {
-    width: 365,
+
     height: 40,
     borderColor: 'rgba(0, 0, 0, 0.9)',
     borderWidth: 0.5,
@@ -151,5 +151,3 @@ const DropdownComponent2 = ({ value, setValue }) => {
 };
 
 export { DropdownComponent1, DropdownComponent2 };
-
-

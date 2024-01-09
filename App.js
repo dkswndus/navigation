@@ -13,6 +13,7 @@ import TimeLimitOFF from './android/app/src/tabata/TimeLimitOFF';
 import TimeLimitON from './android/app/src/tabata/TimeLimitON';
 import FlatList from './android/app/src/tabata/FlatList';
 import CircularTimer from './android/app/src/tabata/CircularTimer';
+import WritePage from './android/app/src/writing/writepage';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,8 +30,8 @@ const HomeScreen = () => {
   return <Text>Home Screen</Text>;
 };
 
-const WritingScreen = () => {
-  return <Text>Writing Screen</Text>;
+const WritingScreen = ({ route }) => {
+  return <WritePage route={route} />;
 };
 
 const TabNavigation = () => {
@@ -97,6 +98,7 @@ const TabNavigation = () => {
 const App = () => {
   return (
     <NavigationContainer>
+
       <Stack.Navigator>
      <Stack.Screen name="TabNavigation" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="TimeLimitOFF" component={TimeLimitOFF} options={{ headerShown: false }} />
