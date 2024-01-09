@@ -98,11 +98,12 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="TabNavigation" component={TabNavigation} options={{ headerShown: false }} />
+     <Stack.Screen name="TabNavigation" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name="TimeLimitOFF" component={TimeLimitOFF} options={{ headerShown: false }} />
         <Stack.Screen name="TimeLimitON" component={TimeLimitON} options={{ headerShown: false }} />
         <Stack.Screen name="FlatList" component={FlatList} options={{ headerShown: false }} />
         <Stack.Screen name="CircularTimer" component={CircularTimer} options={{ headerShown: true }} />
+       
       </Stack.Navigator>
     </NavigationContainer>
   );
